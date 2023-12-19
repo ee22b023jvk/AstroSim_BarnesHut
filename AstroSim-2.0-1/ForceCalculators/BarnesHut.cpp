@@ -108,14 +108,14 @@ class BarnesHutMethods {
             delete root;
         }
 
-        vector<long double> TreeForce(Node* node, GravitationalBody& body){
+        vector<long double> TreeForce(Node* node, GravitationalBody& body){                 //G needs to be 6.67*10-34
             long double fx=0, fy=0, fz=0;
             if (node->particles.size()==1){
                 if (node->particles[0]!=&body){
-                    long double r2 = pow((node->com[0]-body.position[0]),2)+pow((node->com[1]-body.position[1]),2)+pow((node->com[2]-body.position[2]),2);
-                    fx = G*body.mass*node->mass*(node->com[0]-body.position[0])/pow(Q_rsqrt(r2),3);
-                    fy = G*body.mass*node->mass*(node->com[1]-body.position[1])/pow(Q_rsqrt(r2),3);
-                    fz = G*body.mass*node->mass*(node->com[2]-body.position[2])/pow(Q_rsqrt(r2),3);                    
+                    long double r = Q_rsqrt(((node->com[0]-body.position[0]),2)+pow((node->com[1]-body.position[1]),2)+pow((node->com[2]-body.position[2]),2));
+                    fx = G*body.mass*node->mass*(node->com[0]-body.position[0])/pow(r,3);
+                    fy = G*body.mass*node->mass*(node->com[1]-body.position[1])/pow(r,3);
+                    fz = G*body.mass*node->mass*(node->com[2]-body.position[2])/pow(r,3);                   
                 }
             }
             else {
@@ -155,6 +155,8 @@ class BarnesHutMethods {
                 fy[i] = ForceOnBody[1];
                 fz[i] = ForceOnBody[2];
             }
+
+            //cout << fx[0] << endl;                      //wrong
             DeleteOcttree(root);
             return {fx,fy,fz};
         }
@@ -166,8 +168,5 @@ BarnesHut::BarnesHut(GravitationalSystem& s):ForceCalculator(s){
 }
 
 valtype BarnesHut::getForce(const int i, const int coordType){
-    assert(forces.size() == 3);
-    assert(forces[i].size() == forces[0].size());                                  //Segmentiation errors, Check
-    //cout << i << endl;
     return forces[coordType][i];
 }

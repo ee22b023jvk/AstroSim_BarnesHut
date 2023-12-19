@@ -16,5 +16,6 @@ valtype DirectForceCalculator::getForce(const int i, const int coordType){
         valtype distsq = distSquare(body.position, current_body.position);
         der+= (-(G * current_body.mass * body.mass * (current_body.position[coordType]-body.position[coordType])) *(pow (Q_rsqrt(distsq),3.0)));
     }
+    
     return der;
 }

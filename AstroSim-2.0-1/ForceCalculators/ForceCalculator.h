@@ -13,6 +13,9 @@ class ForceCalculator{
         GravitationalSystem s;
     public:
         ForceCalculator(GravitationalSystem& s);
+        virtual ~ForceCalculator(){
+            //cout << "Destroyed Force" << endl;
+        }
         virtual valtype getForce(const int i, const int coordType)= 0;
 };
 

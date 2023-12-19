@@ -12,6 +12,9 @@ class BarnesHut : public ForceCalculator{
         vector<vector<long double>> forces;
     public:
         BarnesHut(GravitationalSystem& s);
+        ~BarnesHut(){
+            //cout << "Destroyed BanresHut" << endl;
+        }
         valtype getForce (const int i, const int coordType) override;
 };
 

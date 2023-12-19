@@ -20,6 +20,7 @@ ForceCalculator* Integrator::buildForceCalculator(GravitationalSystem& oldsystem
         case Direct : return new DirectForceCalculator(oldsystem); 
         break;
         case BarnesHutC : return new BarnesHut(oldsystem);
+        break;
     }
     throw std::invalid_argument("No ForceCalculator of the specified type");
 }
