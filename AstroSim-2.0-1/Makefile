@@ -27,7 +27,7 @@ debug:
 	g++ $(CCFLAGS_DEBUG) -o sim.exe main.cpp Simulator/Simulator.o Integrators/EulerIntegrator.o Integrators/Integrator.o ForceCalculators/DirectForceCalculator.o ForceCalculators/ForceCalculator.o  ForceCalculator/utils.o Body/body.o
 
 run: build
-	./sim.exe "outfile.txt" "infile.txt" 8000 0.01
+	./sim.exe "outfile.txt" "infile.txt" 10000 0.01
 
 plot:
 	python3 plotting/plot.py "outfile.txt"
